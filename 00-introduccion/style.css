@@ -1,0 +1,27 @@
+header > h3 {
+    text-align:center;
+}
+
+.hotel-item{
+    display:flex;
+    justify-content: space-between;
+    border: 1px solid grey;
+    border-radius: 4px;
+    padding: 16px;
+    align-items: flex-start;
+}
+
+.hotel-name{
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+.hotel-description{
+    max-width:200px;
+}
+
+.hotel-phone{
+    font-weight: 700;
+    font-size: 1.5rem;
+}
