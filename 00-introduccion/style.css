@@ -1,27 +1,36 @@
 header > h3 {
-    text-align:center;
+  text-align: center;
 }
 
-.hotel-item{
-    display:flex;
-    justify-content: space-between;
-    border: 1px solid grey;
-    border-radius: 4px;
-    padding: 16px;
-    align-items: flex-start;
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+main {
+  max-width: 95%;
+  margin: 0 auto;
 }
 
-.hotel-name{
-    font-weight: 700;
-    font-size: 1.5rem;
-    text-transform: uppercase;
+.hotel-item {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid grey;
+  border-radius: 4px;
+  padding: 16px;
+  align-items: flex-start;
+  margin-bottom: 8px;
 }
 
-.hotel-description{
-    max-width:200px;
+.hotel-name {
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-transform: uppercase;
 }
 
-.hotel-phone{
-    font-weight: 700;
-    font-size: 1.5rem;
+.hotel-description {
+  max-width: 200px;
+}
+
+.hotel-phone {
+  font-weight: 700;
+  font-size: 1.5rem;
 }
