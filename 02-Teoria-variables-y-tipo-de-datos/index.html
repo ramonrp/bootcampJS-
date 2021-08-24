@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Review</title>
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script defer src="app.js"></script>
 </head>
 <body>
@@ -23,9 +24,15 @@
         </div>
     </section>
     <section class="hotel-rating">
-        <div>Puntuación: <span id="star-rating"></span></div>
+        <div class="star-rating-wrapper">Puntuación: 
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star "></span>
+            <span class="fa fa-star "></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+        </div>
         <label>Reseña anónima</label>
-        <input type="checkbox">
+        <input id="anonimous" type="checkbox">
     </section>
 </main>
 </body>

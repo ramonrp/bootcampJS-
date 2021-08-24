@@ -12,6 +12,12 @@ body {
   border: 1px solid grey;
   background-color: rgb(219, 219, 219);
 }
+.img-wrapper {
+  max-width: 50%;
+}
+.img-wrapper img {
+  width: 100%;
+}
 
 .hotel-info {
   display: flex;
@@ -26,4 +32,8 @@ body {
   border-bottom: 1px solid grey;
   margin-bottom: 16px;
   padding-bottom: 16px;
+}
+
+.checked {
+  color: orange;
 }
