@@ -3,8 +3,18 @@
   margin: 16px auto;
 }
 
+.img-wrapper {
+  width: 30%;
+  margin: 0 auto;
+}
+
+#avatar-img {
+  width: 100%;
+  display: block;
+  border-radius: 50%;
+}
+
 header {
-  text-align: center;
   margin-bottom: 16px;
 }
 
