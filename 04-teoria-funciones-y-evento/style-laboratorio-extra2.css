@@ -1,0 +1,11 @@
+main form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+}
+
+main h3,
+header h1 {
+  text-align: center;
+}

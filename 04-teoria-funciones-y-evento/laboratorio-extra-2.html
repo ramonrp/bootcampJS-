@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Reservation</title>
+    <link rel="stylesheet" href="./style-laboratorio-extra2.css">
+    <script defer src="laboratorio-extra-2.js"></script>
+</head>
+<body>
+<header>
+    <h1>Cálculo precio reserva</h1>
+</header>
+<main>
+    <form>
+        <label for="room-type">¿Que tipo de habitación desea?
+            <select  id="room-type" name="room-type">
+                <option value="standar">Standar</option>
+                <option value="junior">Junior Suite</option>
+                <option value ="suite">Suite</option>
+            </select>
+        </label>
+        <label for="spa" >Desea hacer uso del Spa
+            <input id="spa" name="spa" type="checkbox">
+        </label>
+        <label for="room-people">¿Para cuantas personas desea la habitación?
+            <select  id="room-people" name="room-people">
+                <option value="simple">Simple</option>
+                <option value="doble">Doble</option>
+                <option value ="triple">Triple</option>
+            </select>
+        </label>
+        <label for="nights" >Número de noches de reserva
+            <input id="nights" name="nights" type="number"  min=1 value="1";>
+        </label>
+        <label for="parking" >¿Cuántas noches de parking necesita?
+            <input id="parking" name="parking" type="number"  min=0 value="0">
+        </label>
+    </form>
+    <h3>El coste total es de <span id="final-price"></span>€</h3>
+</main>
+</body>
+</html>
