@@ -28,7 +28,7 @@ function division(a,b){
 
 //check inputs correct
 function checkCorrectInputs(a,b){
-    if(operandA.value === "" || operandB.value === ""){
+    if(a === "" || b === ""){
         result.textContent = "Error"
         return false
     } else{
