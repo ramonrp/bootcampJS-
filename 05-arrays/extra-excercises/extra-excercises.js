@@ -44,7 +44,7 @@ console.log(postiveArray,negativeArray)
 const negativeArray2 = []
 for(let index in array2){
     if(array2[index] < 0){
-        negativeArray2.push(...array2.splice(index))
+        negativeArray2.push(...array2.splice(index,1))
     }
 }
 
