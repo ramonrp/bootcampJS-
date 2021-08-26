@@ -71,7 +71,7 @@ showFullCarrito(shoppingCart)
 function calculateTotalCost(shoppingCart){
     let total = 0;
     for (let product of shoppingCart){
-        total += product.price
+        total += product.price*product.count
     }
 
     return total
@@ -119,7 +119,7 @@ showProductsNameHTML(shoppingCart, productList)
 function calculateTotalCostWithDiscount(shoppingCart){
     let total = 0;
     for (let product of shoppingCart){
-        total += product.price
+        total += product.price*product.count
     }
 
     return total < 100 ? total : total*0.95
