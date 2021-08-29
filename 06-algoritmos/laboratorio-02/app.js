@@ -15,10 +15,11 @@ for (let i=0; i<encryptedAlphabet.length; i++){
 
 
 function encript(string){
-    let encriptedString="";
+    let encriptedString= "";
     for(let letter of string){
-        if(encriptedObject[letter]){
-            encriptedString += encriptedObject[letter]
+
+        if(encriptedObject[letter.toLowerCase()]){
+            encriptedString += encriptedObject[letter.toLowerCase()]
         }else{
             encriptedString += letter
         }
@@ -30,8 +31,8 @@ function encript(string){
 function desencript(string){
     let desencriptedString="";
     for(let letter of string){
-        if(desencriptObject[letter]){
-            desencriptedString += desencriptObject[letter]
+        if(desencriptObject[letter.toLowerCase()]){
+            desencriptedString += desencriptObject[letter.toLowerCase()]
         }else{
             desencriptedString += letter
         }
@@ -40,13 +41,30 @@ function desencript(string){
     return desencriptedString
 }
 
+//Adding functionality to html
+const plainTextArea = document.getElementById("plain-text")
+const encriptTextArea = document.getElementById("encript-text")
+const encriptButton = document.getElementById("encript-button")
+const desencriptButton = document.getElementById("desencript-button")
 
+encriptButton.addEventListener("click", handleEncript)
+desencriptButton.addEventListener("click", handleDesencript)
+
+function handleEncript(){
+    const plainText = plainTextArea.value;
+    encriptTextArea.value = encript2(plainText)
+}
+
+function handleDesencript(){
+    const encriptedTExt = encriptTextArea.value;
+    plainTextArea.value = desencript2(encriptedTExt)
+}
 // Ej 1 extra: resolve using indexOf
 
 function encript2(string){
     let encriptedString="";
     for(let letter of string){
-        let index = plainAlphabet.indexOf(letter)
+        let index = plainAlphabet.indexOf(letter.toLowerCase())
         if(index === -1){
             encriptedString += letter
         }else{
@@ -60,7 +78,7 @@ function encript2(string){
 function desencript2(string){
     let desencriptedString="";
     for(let letter of string){
-        let index = encryptedAlphabet.indexOf(letter)
+        let index = encryptedAlphabet.indexOf(letter.toLowerCase())
         if (index === -1){
             desencriptedString += letter
         }else{
