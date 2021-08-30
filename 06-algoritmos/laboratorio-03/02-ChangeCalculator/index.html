@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Calculator</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="./styles.css">
+    <script defer src="./app.js"></script>
+</head>
+<body>
+<header>
+    <h1>Change Calculator</h1>
+</header>
+<main>
+    <form id="change-form">
+        <div>
+            <label for="ticket">Introduce total ticket amount</label>
+            <input id="ticket" name="ticket" type="text">
+        </div>
+        <div>
+            <label for="cash">Introduce delivered cash</label>
+            <input id="cash" name="cash" type="number">
+        </div>
+        <button id="change-button">Calculate change</button>
+    </form>
+    <ul id="change-list">
+    </ul>
+</main>
+</body>
+</html>
