@@ -1,116 +1,88 @@
-// Ejercicio 1: Enigma
+// Ej extra 1: Agenda
 
-const plainAlphabet = "abcdefghijklmnopqrstuvwxyz:()!¡,'";
-const encryptedAlphabet = "qw,ert(yuio'pa:sdfg!hjklz¡xcv)bnm";
+// Constantes
+const WORK_HOURS = [
+    "08:00 - 09:00",
+    "09:00 - 10:00",
+    "10:00 - 11:00",
+    "11:00 - 12:00",
+    "12:00 - 13:00",
+    "13:00 - 14:00",
+    "15:00 - 16:00",
+    "16:00 - 17:00"
+];
 
-const encriptedObject = {}
-for (let i=0; i<plainAlphabet.length; i++){
-    encriptedObject[plainAlphabet[i]] = encryptedAlphabet[i];
+// Datos
+let myTeam = [
+    {
+    name: "María",
+    availability: new Array(8).fill(true)
+    },
+    {
+    name: "Pedro",
+    availability: new Array(8).fill(true)
+    },
+    {
+    name: "Esther",
+    availability: new Array(8).fill(true)
+    },
+    {
+    name: "Marcos",
+    availability: new Array(8).fill(true)
+    },
+];
+
+function randomBoolean(){
+    return Math.round(Math.random()) === 0 ? false : true;
 }
 
-desencriptObject = {}
-for (let i=0; i<encryptedAlphabet.length; i++){
-    desencriptObject[encryptedAlphabet[i]] = plainAlphabet[i];
+function createRandomAvalaibility(workersArray){
+    const workersCopy = [...workersArray]
+    for(let worker of workersCopy){
+        const randomAvalaiblity = worker.availability.map(randomBoolean)
+        worker.availability = randomAvalaiblity
+    }
+    return workersCopy
 }
 
+myTeam = createRandomAvalaibility(myTeam)
 
-function encript(string){
-    let encriptedString= "";
-    for(let letter of string){
+function showAvalaibilityOfEachWorker(worker){
+    console.log(`${worker.name} is avalaible:`)
+    for(let i=0; i < WORK_HOURS.length; i++){
+        console.log(`${WORK_HOURS[i]}: ${worker.availability[i]}`)
+    }
+}
 
-        if(encriptedObject[letter.toLowerCase()]){
-            encriptedString += encriptedObject[letter.toLowerCase()]
-        }else{
-            encriptedString += letter
+function showAllWokersAvalaibility(workersArray){
+    for(let worker of workersArray){
+        showAvalaibilityOfEachWorker(worker);
+    }
+}
+
+showAllWokersAvalaibility(myTeam)
+
+function checkFirstHourAvalaibleFullTeam(myTeam){
+    let count = 0;
+    for(let i = 0; i<WORK_HOURS.length ; i++){
+        if(myTeam[0].availability[i]){
+            for(let j = 1; j < myTeam.length; j++){
+                if(myTeam[j].availability[i]){
+                    count++;
+                }else{
+                    count=0;
+                }
+            }
+        }
+        if(count === myTeam.length-1){
+            console.log(`First avalailable hour for full team: ${WORK_HOURS[i]}`);
+            break;
         }
     }
-
-    return encriptedString
-}
-
-function desencript(string){
-    let desencriptedString="";
-    for(let letter of string){
-        if(desencriptObject[letter.toLowerCase()]){
-            desencriptedString += desencriptObject[letter.toLowerCase()]
-        }else{
-            desencriptedString += letter
-        }
+    
+    if(count < myTeam.length-1){
+        console.log("not hours availaible for full team")
     }
-
-    return desencriptedString
 }
 
-//Adding functionality to html
-const plainTextArea = document.getElementById("plain-text")
-const encriptTextArea = document.getElementById("encript-text")
-const encriptButton = document.getElementById("encript-button")
-const desencriptButton = document.getElementById("desencript-button")
-
-encriptButton.addEventListener("click", handleEncript)
-desencriptButton.addEventListener("click", handleDesencript)
-
-function handleEncript(){
-    const plainText = plainTextArea.value;
-    encriptTextArea.value = encript2(plainText)
-}
-
-function handleDesencript(){
-    const encriptedTExt = encriptTextArea.value;
-    plainTextArea.value = desencript2(encriptedTExt)
-}
-// Ej 1 extra: resolve using indexOf
-
-function encript2(string){
-    let encriptedString="";
-    for(let letter of string){
-        let index = plainAlphabet.indexOf(letter.toLowerCase())
-        if(index === -1){
-            encriptedString += letter
-        }else{
-            encriptedString += encryptedAlphabet[index]
-        }
-    }
-
-    return encriptedString
-}
-
-function desencript2(string){
-    let desencriptedString="";
-    for(let letter of string){
-        let index = encryptedAlphabet.indexOf(letter.toLowerCase())
-        if (index === -1){
-            desencriptedString += letter
-        }else{
-            desencriptedString += plainAlphabet[index]
-        }
-    }
-
-    return desencriptedString
-}
-
-
-
-// Ej 2: Generador Aleatorio
-
-function randomPick(n, min, max){
-    if(max-min< n) throw new Error("n should be bigger than max - min")
-    const randomArray = []
-
-    function aleatoryNumber(){
-        const range = (max-min +1)
-        const number = Math.floor(Math.random()*range + min)
-        return number
-    }
-    let i = 0;
-    while(i<n){
-        let newNumber = aleatoryNumber()
-        if(!randomArray.includes(newNumber)){
-            randomArray.push(newNumber)
-            i++;
-        }
-    }
-
-    return randomArray
-
-}
+checkFirstHourAvalaibleFullTeam(myTeam);
