@@ -7,62 +7,62 @@ const EXEMPT_TYPE = 0;
 
 // products data
 let products = [
-{
-description: "Goma de borrar",
-price: 0.25,
-tax: LOWER_TYPE,
-stock: 2,
-units: 0,
-},
-{
-description: "Lápiz H2",
-price: 0.4,
-tax: LOWER_TYPE,
-stock: 5,
-units: 0,
-},
-{
-description: "Cinta rotular",
-price: 9.3,
-tax: REGULAR_TYPE,
-stock: 2,
-units: 0,
-},
-{
-description: "Papelera plástico",
-price: 2.75,
-tax: REGULAR_TYPE,
-stock: 5,
-units: 0,
-},
-{
-description: "Escuadra",
-price: 8.4,
-tax: REGULAR_TYPE,
-stock: 3,
-units: 0,
-},
-{
-description: "Pizarra blanca",
-price: 5.95,
-tax: REGULAR_TYPE,
-stock: 2,
-units: 0,
-},
-{
-description: "Afilador",
-price: 1.2,
-tax: LOWER_TYPE,
-stock: 10,
-units: 0,
-},
-{
-description: "Libro ABC",
-price: 19,
-tax: EXEMPT_TYPE,
-stock: 2,
-units: 0,
-},
+    {
+        description: "Goma de borrar",
+        price: 0.25,
+        tax: LOWER_TYPE,
+        stock: 2,
+        units: 0,
+    },
+    {
+        description: "Lápiz H2",
+        price: 0.4,
+        tax: LOWER_TYPE,
+        stock: 5,
+        units: 0,
+    },
+    {
+        description: "Cinta rotular",
+        price: 9.3,
+        tax: REGULAR_TYPE,
+        stock: 2,
+        units: 0,
+    },
+    {
+        description: "Papelera plástico",
+        price: 2.75,
+        tax: REGULAR_TYPE,
+        stock: 5,
+        units: 0,
+    },
+    {
+        description: "Escuadra",
+        price: 8.4,
+        tax: REGULAR_TYPE,
+        stock: 3,
+        units: 0,
+    },
+    {
+        description: "Pizarra blanca",
+        price: 5.95,
+        tax: REGULAR_TYPE,
+        stock: 2,
+        units: 0,
+    },
+    {
+        description: "Afilador",
+        price: 1.2,
+        tax: LOWER_TYPE,
+        stock: 10,
+        units: 0,
+    },
+    {
+        description: "Libro ABC",
+        price: 19,
+        tax: EXEMPT_TYPE,
+        stock: 2,
+        units: 0,
+    },
 ];
 
 //DOM List
@@ -70,8 +70,8 @@ const list = document.getElementById("product-list")
 const calculateButton = document.getElementById("calculate-button")
 //generate dinamic HTML
 
-function addProductToList(product, nodeToAdd){
-    const {description, price,units,stock} = product;
+function addProductToList(product, nodeToAdd) {
+    const { description, price, units, stock } = product;
     const listItem = document.createElement("li");
     listItem.classList.add("product-item");
     listItem.innerText = `${description} - ${price}€/ud`
@@ -87,24 +87,14 @@ function addProductToList(product, nodeToAdd){
     nodeToAdd.appendChild(listItem)
 
 
-    function handleChangeInput(e){
-        if(e.target.value > stock){
+    function handleChangeInput(e) {
+        if (e.target.value > stock) {
             e.target.value = stock;
-        }else if(e.target.value < 0){
+        } else if (e.target.value < 0) {
             e.target.value = 0
         }
-        
-        product.units = e.target.value
-        const copyProducts = [...products]
-        copyProducts.map(originalProduct=>{
-            if(originalProduct.description === product.description){
-                return product
-            }else{
-                return originalProduct
-            }
-        })
 
-        products = copyProducts;
+        product.units = e.target.value
 
         enableDisableCalculateButton(calculateButton)
 
@@ -112,8 +102,8 @@ function addProductToList(product, nodeToAdd){
     }
 }
 
-function addAllProductsToList(productsArray){
-    for(product of productsArray){
+function addAllProductsToList(productsArray) {
+    for (product of productsArray) {
         addProductToList(product, list)
     }
 }
@@ -123,19 +113,19 @@ addAllProductsToList(products);
 
 //calculate total order
 
-function calculatePriceWithoutVat(productsArray){
+function calculatePriceWithoutVat(productsArray) {
     let total = 0;
-    for(product of productsArray){
-        total +=product.price * product.units
+    for (product of productsArray) {
+        total += product.price * product.units
     }
 
     return total;
 }
 
-function calculateVAT(productsArray){
+function calculateVAT(productsArray) {
     let total = 0;
-    for (product of productsArray){
-        total += product.price*product.units*product.tax/100
+    for (product of productsArray) {
+        total += product.price * product.units * product.tax / 100
     }
 
     return total
@@ -151,10 +141,10 @@ const total = document.getElementById("total")
 
 calculateButton.addEventListener("click", handleCalculateButton)
 
-function handleCalculateButton(){
+function handleCalculateButton() {
     const subtotalQuantity = calculatePriceWithoutVat(products)
     const vatQuantity = calculateVAT(products)
-    
+
     subtotal.innerText = subtotalQuantity.toFixed(2)
     vat.innerText = vatQuantity.toFixed(2)
     total.innerText = (vatQuantity + subtotalQuantity).toFixed(2)
@@ -163,16 +153,16 @@ function handleCalculateButton(){
 
 //extra: enable / disabled calculate button
 
-function checkAllProductsUnitsAreZero(productsArray){
-    return productsArray.every(product=>{
+function checkAllProductsUnitsAreZero(productsArray) {
+    return productsArray.every(product => {
         return product.units == 0
     })
 }
 
-function enableDisableCalculateButton(button){
-    if(checkAllProductsUnitsAreZero(products)){
+function enableDisableCalculateButton(button) {
+    if (checkAllProductsUnitsAreZero(products)) {
         button.disabled = true;
-    }else{
+    } else {
         button.disabled = false;
     }
 }
