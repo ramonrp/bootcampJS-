@@ -81,3 +81,53 @@ var halfDiamond = (n, char) => {
     }
 }
 
+
+
+
+//*************************************** */
+
+//Roll dice trick
+
+function rollDice(){
+    const range = (6- 1 + 1)
+    return Math.floor(Math.random()*range) + 1
+}
+
+//quick alternative: number 6 50% chances
+
+const numberProbability = [1,2,3,4,5,6,6,6,6,6]
+
+function rollDiceTricked(){
+    const index = Math.floor(Math.random()*10) 
+    console.log(index)
+    return numberProbability[index]
+}
+
+
+// exactly alternative
+
+// array with probability for each number
+
+const exactNumberProbability = [5, 5, 5, 10, 10, 65]
+
+function calculateAcuumulateProbability(array){
+    let acc = 0;
+    return array.map(item =>{
+        acc += item
+        return acc
+    })
+}
+
+//generate number [0,100) and check
+function rollDiceTricked2(){
+    const probabilityArray = calculateAcuumulateProbability(exactNumberProbability);
+    const alteatoryNumber = Math.floor(Math.random()*100)
+    let result;
+    for (let number = 0; number < probabilityArray.length ; number++){
+        if(alteatoryNumber <= probabilityArray[number]){
+            result = number + 1;
+            break;
+        }
+    }
+    return result
+}
