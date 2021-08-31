@@ -23,33 +23,10 @@ function handleSubmit(e){
 }
 
 
-const avalaibleMoney = {
-    200: 5,
-    100: 2,
-    50: 0,
-    20: 1, 
-    10: 4,
-    5: 1,
-    2: 1,
-    1: 1,
-    0.5: 1,
-    0.20: 1,
-    0.10: 1,
-    0.05: 1,
-    0.02: 1,
-    0.01: 1,
-}
-
-function calculateTotalCashCashier(avalaibleMoney){
-    let totalMoneyAvalaible = 0;
-    for (let banknote in avalaibleMoney){
-        totalMoneyAvalaible += avalaibleMoney[banknote]*banknote
-    }
-    return totalMoneyAvalaible
-}
-
 const orderChange = [200, 100, 50, 20, 10, 5, 2, 1, 0.5, 0.20, 0.10, 0.05, 0.02, 0.01]
 
+
+// utils
 function calculateTotalChange(ticket, money){
     return money-ticket;
 }
