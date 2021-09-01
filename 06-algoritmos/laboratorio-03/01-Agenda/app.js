@@ -15,72 +15,72 @@ const WORK_HOURS = [
 // Datos
 let myTeam = [
     {
-    name: "María",
-    availability: new Array(8).fill(true)
+        name: "María",
+        availability: new Array(8).fill(true)
     },
     {
-    name: "Pedro",
-    availability: new Array(8).fill(true)
+        name: "Pedro",
+        availability: new Array(8).fill(true)
     },
     {
-    name: "Esther",
-    availability: new Array(8).fill(true)
+        name: "Esther",
+        availability: new Array(8).fill(true)
     },
     {
-    name: "Marcos",
-    availability: new Array(8).fill(true)
+        name: "Marcos",
+        availability: new Array(8).fill(true)
     },
 ];
 
-function randomBoolean(){
-    return Math.round(Math.random()) === 0 ? false : true;
+function randomBoolean() {
+    return Math.round(Math.random()) === 0
 }
 
-function createRandomAvalaibility(workersArray){
+function createRandomAvalaibility(workersArray) {
     const workersCopy = [...workersArray]
-    for(let worker of workersCopy){
-        const randomAvalaiblity = worker.availability.map(randomBoolean)
-        worker.availability = randomAvalaiblity
-    }
-    return workersCopy
+    return workersCopy.map(worker => {
+        const newAvalaibility = worker.availability.map(randomBoolean)
+        worker.availability = newAvalaibility;
+        return worker
+    })
 }
 
 myTeam = createRandomAvalaibility(myTeam)
 
-function showAvalaibilityOfEachWorker(worker){
+function showAvalaibilityOfEachWorker(worker) {
     console.log(`${worker.name} is avalaible:`)
-    for(let i=0; i < WORK_HOURS.length; i++){
+    for (let i = 0; i < WORK_HOURS.length; i++) {
         console.log(`${WORK_HOURS[i]}: ${worker.availability[i]}`)
     }
 }
 
-function showAllWokersAvalaibility(workersArray){
-    for(let worker of workersArray){
+function showAllWorkersAvalaibility(workersArray) {
+    for (let worker of workersArray) {
         showAvalaibilityOfEachWorker(worker);
     }
 }
 
-showAllWokersAvalaibility(myTeam)
+showAllWorkersAvalaibility(myTeam)
 
-function checkFirstHourAvalaibleFullTeam(myTeam){
+function checkFirstHourAvalaibleFullTeam(myTeam) {
     let count = 0;
-    for(let i = 0; i<WORK_HOURS.length ; i++){
-        if(myTeam[0].availability[i]){
-            for(let j = 1; j < myTeam.length; j++){
-                if(myTeam[j].availability[i]){
+    for (let i = 0; i < WORK_HOURS.length; i++) {
+        if (myTeam[0].availability[i]) {
+            for (let j = 1; j < myTeam.length; j++) {
+                if (myTeam[j].availability[i]) {
                     count++;
-                }else{
-                    count=0;
+                } else {
+                    count = 0;
                 }
             }
         }
-        if(count === myTeam.length-1){
+        if (count === myTeam.length - 1) {
             console.log(`First avalailable hour for full team: ${WORK_HOURS[i]}`);
             break;
         }
     }
-    
-    if(count < myTeam.length-1){
+
+    if (count < myTeam.length - 1) {
         console.log("not hours availaible for full team")
     }
 }
