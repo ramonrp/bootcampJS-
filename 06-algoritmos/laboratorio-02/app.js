@@ -4,23 +4,23 @@ const plainAlphabet = "abcdefghijklmnopqrstuvwxyz:()!¡,'";
 const encryptedAlphabet = "qw,ert(yuio'pa:sdfg!hjklz¡xcv)bnm";
 
 const encriptedObject = {}
-for (let i=0; i<plainAlphabet.length; i++){
+for (let i = 0; i < plainAlphabet.length; i++) {
     encriptedObject[plainAlphabet[i]] = encryptedAlphabet[i];
 }
 
-desencriptObject = {}
-for (let i=0; i<encryptedAlphabet.length; i++){
+const desencriptObject = {}
+for (let i = 0; i < encryptedAlphabet.length; i++) {
     desencriptObject[encryptedAlphabet[i]] = plainAlphabet[i];
 }
 
 
-function encript(string){
-    let encriptedString= "";
-    for(let letter of string){
+function encriptDesencript(string, alphabetObject) {
+    let encriptedString = "";
+    for (let letter of string) {
 
-        if(encriptedObject[letter.toLowerCase()]){
-            encriptedString += encriptedObject[letter.toLowerCase()]
-        }else{
+        if (alphabetObject[letter.toLowerCase()]) {
+            encriptedString += alphabetObject[letter.toLowerCase()]
+        } else {
             encriptedString += letter
         }
     }
@@ -28,18 +28,7 @@ function encript(string){
     return encriptedString
 }
 
-function desencript(string){
-    let desencriptedString="";
-    for(let letter of string){
-        if(desencriptObject[letter.toLowerCase()]){
-            desencriptedString += desencriptObject[letter.toLowerCase()]
-        }else{
-            desencriptedString += letter
-        }
-    }
 
-    return desencriptedString
-}
 
 //Adding functionality to html
 const plainTextArea = document.getElementById("plain-text")
@@ -50,24 +39,24 @@ const desencriptButton = document.getElementById("desencript-button")
 encriptButton.addEventListener("click", handleEncript)
 desencriptButton.addEventListener("click", handleDesencript)
 
-function handleEncript(){
+function handleEncript() {
     const plainText = plainTextArea.value;
-    encriptTextArea.value = encript2(plainText)
+    encriptTextArea.value = encriptDesencript2(plainText, plainAlphabet, encryptedAlphabet)
 }
 
-function handleDesencript(){
+function handleDesencript() {
     const encriptedTExt = encriptTextArea.value;
-    plainTextArea.value = desencript2(encriptedTExt)
+    plainTextArea.value = encriptDesencript2(encriptedTExt, encryptedAlphabet, plainAlphabet)
 }
 // Ej 1 extra: resolve using indexOf
 
-function encript2(string){
-    let encriptedString="";
-    for(let letter of string){
+function encriptDesencript2(string, plainAlphabet, encryptedAlphabet) {
+    let encriptedString = "";
+    for (let letter of string) {
         let index = plainAlphabet.indexOf(letter.toLowerCase())
-        if(index === -1){
+        if (index === -1) {
             encriptedString += letter
-        }else{
+        } else {
             encriptedString += encryptedAlphabet[index]
         }
     }
@@ -75,13 +64,13 @@ function encript2(string){
     return encriptedString
 }
 
-function desencript2(string){
-    let desencriptedString="";
-    for(let letter of string){
+function desencript2(string) {
+    let desencriptedString = "";
+    for (let letter of string) {
         let index = encryptedAlphabet.indexOf(letter.toLowerCase())
-        if (index === -1){
+        if (index === -1) {
             desencriptedString += letter
-        }else{
+        } else {
             desencriptedString += plainAlphabet[index]
         }
     }
@@ -93,19 +82,19 @@ function desencript2(string){
 
 // Ej 2: Generador Aleatorio
 
-function randomPick(n, min, max){
-    if(max-min< n) throw new Error("n should be bigger than max - min")
+function randomPick(n, min, max) {
+    if (max - min < n) throw new Error("n should be bigger than max - min")
     const randomArray = []
 
-    function aleatoryNumber(){
-        const range = (max-min +1)
-        const number = Math.floor(Math.random()*range + min)
+    function aleatoryNumber() {
+        const range = (max - min + 1)
+        const number = Math.floor(Math.random() * range + min)
         return number
     }
     let i = 0;
-    while(i<n){
+    while (i < n) {
         let newNumber = aleatoryNumber()
-        if(!randomArray.includes(newNumber)){
+        if (!randomArray.includes(newNumber)) {
             randomArray.push(newNumber)
             i++;
         }
