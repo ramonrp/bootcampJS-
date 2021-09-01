@@ -1,52 +1,58 @@
-//Ej extra 2: Calculadora de cambio óptimo
+//Ex 1: IBAN validation
 
-//Dom Nodes
+const IBAN1 = "ES6600190020961234567890"
+const IBAN2 = "ES66 0019 0020 9612 3456 7890"
+const ibanArray = [IBAN1, IBAN2]
 
-const changeForm = document.getElementById("change-form")
-const changeButton = document.getElementById("change-button")
-const list = document.getElementById("change-list")
+//Case 1
 
-//EventListener
-changeForm.addEventListener("submit", handleSubmit)
+const ex1Case1 = /^[A-Za-z]{2}\d{22}$/
+console.log(`IBAN ${IBAN1} is valid:`, ex1Case1.test(IBAN1))  //true
 
-function handleSubmit(e){
-    e.preventDefault();
-    list.innerHTML = ""
-    const ticketAmount = e.target.elements.ticket.value
-    const cashAmount = e.target.elements.cash.value
-    const changeAmount = calculateTotalChange(ticketAmount, cashAmount)
-    const changeArray = calculateChange(orderChange, changeAmount);
+//Case 2
+
+const ex1Case2 = /^[A-Za-z]{2}\d{2}\s?(\d{4}\s?){4}\d{4}$/
+
+for(let iban of ibanArray){
+    console.log(`IBAN ${iban} is valid:`,ex1Case2.test(iban))
+}
+
+//Case 3
+
+const ex1Case3 = /^([A-Za-z]{2})\d{2}\s?\d{4}\s?\d{4}\s?(\d{2})\d{2}\s?\d{4}\s?\d{4}$/
+
+const [fullAccount,countryCode, controlNumber] = ex1Case3.exec(IBAN1)
+
+
+//Ex2: Validation european car number plate
+
+const validNumberPlates = ["2021 GMD", "2345-GMD", "4532BDB", "0320-AAA"]
+
+//Case 1
+
+const ex2Case1 = /^\d{4}[\s-]?[A-Z]{3}$/
+
+for(let numberPlate of validNumberPlates){
+    console.log(`Number Plate ${numberPlate} is valid:`,ex2Case1.test(numberPlate))
+}
+
+
+//Case 2
+
+const ex2Case2 = /^(\d{4})[\s-]?([A-Z]{3})$/
+
+const [fullPlate,numberPlate, lettersPlate] = ex2Case2.exec(validNumberPlates[0])
+
+//Case 3: do same with a string full of plates and using match  method
+
+const ex2Case3 = /(\d{4})[\s-]?([A-Z]{3})/g;
+
+
+const someStringWithPlates ="In this text you will find some valid plates and random characters: 2021 GMD 2345-GMD adsfadsf 4532BDB asdfads  0320-AAA adsfadsf "
+const platesArray = someStringWithPlates.match(ex2Case3)
+
+for(let plate of platesArray){
+    const [fullPlate,numberPlate, lettersPlate] = plate.match(ex2Case2)
+    console.log(`Plate: ${fullPlate}, number: ${numberPlate}, letters: ${lettersPlate}`)
     
-    for(let banknote of changeArray){
-        createListChangeItem(list, banknote)
-    }
 }
-
-
-const orderChange = [200, 100, 50, 20, 10, 5, 2, 1, 0.5, 0.20, 0.10, 0.05, 0.02, 0.01]
-
-
-// utils
-function calculateTotalChange(ticket, money){
-    return money-ticket;
-}
-
-
-function calculateChange(moneyArray, change){
-    const changeArray = []
-    for(let banknote of moneyArray){
-        let moneyQuantity = Math.floor(change / banknote)
-        if(moneyQuantity >= 1){
-            changeArray.push([banknote, moneyQuantity])
-            change = change % banknote
-        }
-    }
-    return changeArray
-}
-
-function createListChangeItem(listNode, changeItem){
-    const li = document.createElement("li");
-    li.textContent = `${changeItem[1]} banknotes / coins ${changeItem[0]}€`
-    listNode.appendChild(li)
-}
-
