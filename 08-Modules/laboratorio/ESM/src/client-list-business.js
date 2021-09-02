@@ -1,3 +1,7 @@
+import { getClients } from "./data-business"
+import {getClientElement} from "./client-business"
+
+
 function printClientsAccounts() {
     const clients = getClients();
     const ul = document.createElement("ul");

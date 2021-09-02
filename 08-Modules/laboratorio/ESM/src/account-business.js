@@ -1,3 +1,5 @@
+import {getNodeStyle} from "./style-business"
+
 function getClientAccountsElement(accounts) {
     const ul = document.createElement("ul");
     for (let account of accounts) {
@@ -14,3 +16,5 @@ function getClientAccountsElement(accounts) {
     li.append("[Saldo: " + account.money + "] IBAN: " + account.iban);
     return li;
   }
+
+  export { getClientAccountsElement }

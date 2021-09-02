@@ -1,3 +1,6 @@
+import {getAccounts} from "./data-business"
+import {getClientAccountsElement} from "./account-business"
+
 function getClientElement(client) {
     const allAccounts = getAccounts();
     const clientAccounts = [];
@@ -25,3 +28,5 @@ function getClientElement(client) {
   function getFullName(client) {
     return client.first_name + " " + client.last_name;
   }
+
+export { getClientElement }

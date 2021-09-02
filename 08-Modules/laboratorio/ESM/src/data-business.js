@@ -171,3 +171,5 @@ function getClients() {
       }
     ];
   }
+
+export { getClients, getAccounts}
