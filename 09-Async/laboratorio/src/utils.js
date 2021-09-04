@@ -39,7 +39,7 @@ const createAvatarDetail = (character) => {
 
 const showCharacter = (character) => {
   const characterDetail = document.getElementById("character-detail");
-
+  characterDetail.classList.add("active");
   characterDetail.innerHTML = "";
   characterDetail.appendChild(createAvatarDetail(character));
   characterDetail.appendChild(createParagraph("Name: " + character.name));

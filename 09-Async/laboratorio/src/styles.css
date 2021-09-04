@@ -19,6 +19,11 @@ body {
   height: 90vh;
   overflow-y: auto;
   width: 50%;
+  display: none;
+}
+
+#character-detail.active {
+  display: revert;
 }
 
 .thumbnail {
