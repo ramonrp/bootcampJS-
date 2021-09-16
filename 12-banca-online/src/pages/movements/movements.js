@@ -6,7 +6,7 @@ import {
   accountFromApiToVM,
 } from './movements.mappers';
 import { getAccount } from '../account/account.api';
-
+import { onSetValues } from '../../common/helpers';
 const params = history.getParams();
 const isOneAccount = Boolean(params.id);
 
@@ -18,7 +18,7 @@ const getInfo = () => {
     });
 
     getAccount(params.id).then((account) => {
-      addGeneralAccountData(accountFromApiToVM(account));
+      onSetValues(accountFromApiToVM(account));
     });
   }
 };
