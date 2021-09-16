@@ -6,6 +6,8 @@ const propertyFromApitoVm = (propertyApi) => {
   const priceFormated = new Intl.NumberFormat('es-ES', {
     style: 'currency',
     currency: 'EUR',
+    maximumFractionDigits: 0,
+    minimumFractionDigits: 0,
   }).format(propertyApi.price);
 
   return {
