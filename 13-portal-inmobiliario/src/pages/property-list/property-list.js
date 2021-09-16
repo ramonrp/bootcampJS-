@@ -11,6 +11,7 @@ import {
   maxPrice,
   minPrice,
 } from './property-list.constants';
+import { onUpdateField, onSubmitForm } from '../../common/helpers';
 
 Promise.all([getPropertyList(), getSaleType(), getProvinces()]).then(
   ([propertyListApi, saleTypeList, provincesList]) => {
@@ -23,3 +24,60 @@ Promise.all([getPropertyList(), getSaleType(), getProvinces()]).then(
     setOptions(maxPrice, 'select-max-price', 'Max (EUR)');
   }
 );
+
+let filter = {
+  saleType: '',
+  province: '',
+  rooms: '',
+  bathrooms: '',
+  minPrice: '',
+  maxPrice: '',
+};
+
+onUpdateField('select-province', (e) => {
+  const value = e.target.value;
+  filter = {
+    ...filter,
+    province: value,
+  };
+});
+
+onUpdateField('select-sale-type', (e) => {
+  const value = e.target.value;
+  filter = {
+    ...filter,
+    saleType: value,
+  };
+});
+
+onUpdateField('select-room', (e) => {
+  const value = e.target.value;
+  filter = {
+    ...filter,
+    rooms: value,
+  };
+});
+
+onUpdateField('select-bathroom', (e) => {
+  const value = e.target.value;
+  filter = {
+    ...filter,
+    bathrooms: value,
+  };
+});
+
+onUpdateField('select-min-price', (e) => {
+  const value = e.target.value;
+  filter = {
+    ...filter,
+    minPrice: value,
+  };
+});
+
+onUpdateField('select-max-price', (e) => {
+  const value = e.target.value;
+  filter = {
+    ...filter,
+    maxPrice: value,
+  };
+});
