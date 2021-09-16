@@ -40,14 +40,3 @@ export const addMovementRows = (movementList) => {
     listElement.appendChild(row);
   });
 };
-
-export const addGeneralAccountData = (account) => {
-  const ibanElement = document.getElementById('iban');
-  ibanElement.innerText = account.iban;
-
-  const aliasElement = document.getElementById('alias');
-  aliasElement.innerText = account.name;
-
-  const balanceElement = document.getElementById('balance');
-  balanceElement.innerText = account.balance;
-};
