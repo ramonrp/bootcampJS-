@@ -3,7 +3,11 @@ import {
   getSaleType,
   getProvinces,
 } from './property-list.api';
-import { addPropertyRows, setOptions } from './property-list.helpers';
+import {
+  addPropertyRows,
+  setOptions,
+  clearPropertyRows,
+} from './property-list.helpers';
 import { propertyListFromApiToVm } from './property-list.mappers';
 import {
   roomOptions,
@@ -26,10 +30,10 @@ Promise.all([getPropertyList(), getSaleType(), getProvinces()]).then(
 );
 
 let filter = {
-  saleType: '',
-  province: '',
-  rooms: '',
-  bathrooms: '',
+  saleTypeId: '',
+  provinceId: '',
+  minRooms: '',
+  minBathrooms: '',
   minPrice: '',
   maxPrice: '',
 };
@@ -38,7 +42,7 @@ onUpdateField('select-province', (e) => {
   const value = e.target.value;
   filter = {
     ...filter,
-    province: value,
+    provinceId: value,
   };
 });
 
@@ -46,7 +50,7 @@ onUpdateField('select-sale-type', (e) => {
   const value = e.target.value;
   filter = {
     ...filter,
-    saleType: value,
+    saleTypeId: value,
   };
 });
 
@@ -54,7 +58,7 @@ onUpdateField('select-room', (e) => {
   const value = e.target.value;
   filter = {
     ...filter,
-    rooms: value,
+    minRooms: value,
   };
 });
 
@@ -62,7 +66,7 @@ onUpdateField('select-bathroom', (e) => {
   const value = e.target.value;
   filter = {
     ...filter,
-    bathrooms: value,
+    minBathrooms: value,
   };
 });
 
@@ -81,3 +85,26 @@ onUpdateField('select-max-price', (e) => {
     maxPrice: value,
   };
 });
+
+onSubmitForm('search-button', (e) => {
+  const query = createQueryParams(filter);
+  getPropertyList(query).then((propertyListApi) => {
+    clearPropertyRows();
+    addPropertyRows(propertyListFromApiToVm(propertyListApi));
+  });
+});
+
+const createQueryParams = (filterObject) => {
+  const { provinceId, saleTypeId, minRooms, minBathrooms, minPrice, maxPrice } =
+    filterObject;
+  const provinceIdQuery = provinceId ? `&provinceId=${provinceId}` : '';
+  const saleTypeIdQuery = saleTypeId ? `&saleTypeIds_like=${saleTypeId}` : '';
+  const minRoomsQuery = minRooms ? `&rooms_gte=${minRooms}` : '';
+  const minBathroomsQuery = minBathrooms
+    ? `&bathrooms_gte=${minBathrooms}`
+    : '';
+  const minPriceQuery = minPrice ? `&price_gte=${minPrice}` : '';
+  const maxPriceQuery = maxPrice ? `&price_lte=${maxPrice}` : '';
+  const finalQuery = `?${provinceIdQuery}${saleTypeIdQuery}${minRoomsQuery}${minBathroomsQuery}${minPriceQuery}${maxPriceQuery}`;
+  return finalQuery;
+};
