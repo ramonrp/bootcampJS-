@@ -11,11 +11,15 @@ const propertyFromApitoVm = (propertyApi) => {
   }).format(propertyApi.price);
 
   return {
-    ...propertyApi,
+    title: propertyApi.title,
+    notes: `${propertyApi.notes.substring(0, 200)}...`,
     image: propertyApi.images[0],
     id: propertyApi.id,
     price: priceFormated,
     squareMeter: `${propertyApi.squareMeter}m²`,
-    rooms: `${propertyApi.rooms} habitaciones`,
+    rooms:
+      propertyApi.rooms > 1
+        ? `${propertyApi.rooms} habitaciones`
+        : `${propertyApi.rooms} habitación`,
   };
 };
