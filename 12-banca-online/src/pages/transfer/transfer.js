@@ -16,21 +16,21 @@ getAccountList().then((accountList) => {
   setAccountOptions(accountList, params.id);
   transfer = {
     ...transfer,
-    ibanOrigin: document.getElementById('select-account').value,
+    accountId: document.getElementById('select-account').value,
   };
 });
 
 let transfer = {
-  ibanOrigin: '',
+  accountId: '',
   iban: '',
   name: '',
   email: '',
   amount: '',
   concept: '',
   notes: '',
-  day: new Date().getDate(),
-  month: new Date().getMonth() + 1,
-  year: new Date().getFullYear(),
+  day: String(new Date().getDate()),
+  month: String(new Date().getMonth() + 1),
+  year: String(new Date().getFullYear()),
   date: new Date(),
 };
 
@@ -38,10 +38,10 @@ onUpdateField('select-account', (event) => {
   const value = event.target.value;
   transfer = {
     ...transfer,
-    ibanOrigin: value,
+    accountId: value,
   };
   formValidation
-    .validateField('ibanOrigin', transfer.ibanOrigin)
+    .validateField('ibanOrigin', transfer.accountId)
     .then((result) => {
       onSetError('accountId', result);
     });
