@@ -8,7 +8,7 @@ import {
   setCheckboxList,
   setOptionList,
   onAddFeature,
-  onRemoveFeature,
+  onAddImage,
 } from './upload-property.helpers';
 
 Promise.all([getProvinces(), getSaleType(), getEquipments()]).then((result) => {
@@ -93,6 +93,7 @@ let propertyData = {
   newFeature: '',
   mainFeatures: [],
   equipments: [],
+  images: [],
 };
 
 onUpdateField('address', (e) => {
@@ -185,7 +186,28 @@ const updateMainFeatures = () => {
   };
 };
 
+let newImages = [];
+onUpdateField('add-image', (e) => {
+  const newFile = e.currentTarget.files[0];
+  newFile.convertToBase64((base64) => {
+    onAddImage(base64);
+    newImages.push(base64);
+    propertyData = {
+      ...propertyData,
+      images: newImages,
+    };
+  });
+});
+
 onSubmitForm('save-button', () => {
   updateMainFeatures();
   console.log(propertyData);
 });
+
+File.prototype.convertToBase64 = function (callback) {
+  var reader = new FileReader();
+  reader.onloadend = function (e) {
+    callback(e.target.result, e.target.error);
+  };
+  reader.readAsDataURL(this);
+};
