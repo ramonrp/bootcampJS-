@@ -151,20 +151,26 @@ onUpdateField('locationUrl', (e) => {
   };
 });
 
-onUpdateField('equipments', (e) => {
-  const value = e.target.value;
-  propertyData = {
-    ...propertyData,
-    equipments: [value],
-  };
-});
 onSubmitForm('insert-feature-button', () => {
   const newFeature = document.getElementById('newFeature').value;
   if (newFeature) {
     onAddFeature(newFeature);
   }
 });
-
+let newEquipments = [];
+onUpdateField('equipments', (e) => {
+  const value = e.target.value;
+  const checked = e.target.checked;
+  if (checked) {
+    newEquipments.push(value);
+  } else {
+    newEquipments = newEquipments.filter((equipment) => equipment != value);
+  }
+  propertyData = {
+    ...propertyData,
+    equipments: newEquipments,
+  };
+});
 const updateMainFeatures = () => {
   let newMainFeatures = [];
   document
