@@ -2,7 +2,13 @@ import { history } from '../../core/router';
 import { getPropertyPerId } from './property-detail.api';
 import { setPropertyValues } from './property-detail.helpers';
 import { propertyDetailFromApiToVm } from './property-detail.mappers';
-import { onUpdateField, onSubmitForm } from '../../common/helpers';
+import {
+  onUpdateField,
+  onSubmitForm,
+  onSetError,
+  onSetFormErrors,
+} from '../../common/helpers';
+import { formValidator } from './property-detail.validators';
 const params = history.getParams();
 
 if (params.id) {
@@ -25,6 +31,9 @@ onUpdateField('email', (e) => {
     ...contact,
     email: value,
   };
+  formValidator.validateField('email', contact.email).then((result) => {
+    onSetError('email', result);
+  });
 });
 
 onUpdateField('message', (e) => {
@@ -33,8 +42,15 @@ onUpdateField('message', (e) => {
     ...contact,
     message: value,
   };
+  formValidator.validateField('message', contact.message).then((result) => {
+    onSetError('message', result);
+  });
 });
 
 onSubmitForm('contact-button', () => {
-  console.log(contact);
+  formValidator.validateForm(contact).then((result) => {
+    onSetFormErrors(result);
+    if (result.succeeded) {
+    }
+  });
 });
