@@ -15,8 +15,8 @@ const validatorSchema = {
     message: [
       {
         validator: Validators.maxLength,
-        customArgs: { length: 100 },
-        message: 'El mensaje no puede contener más de 100 caráteres',
+        customArgs: { length: 250 },
+        message: 'El mensaje no puede contener más de 250 caráteres',
       },
     ],
   },
