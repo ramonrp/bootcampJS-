@@ -9,3 +9,7 @@ export const getSaleType = () => {
 export const getProvinces = () => {
   return Axios.get(`${url}/provinces`).then((response) => response.data);
 };
+
+export const getEquipments = () => {
+  return Axios.get(`${url}/equipments`).then((response) => response.data);
+};
