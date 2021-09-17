@@ -1,4 +1,12 @@
 import { onUpdateField, onSubmitForm } from '../../common/helpers';
+import { getProvinces, getSaleType } from './upload-property.api';
+import { setCheckboxList, setOptionList } from './upload-property.helpers';
+
+Promise.all([getProvinces(), getSaleType()]).then((result) => {
+  const [provinces, saleTypes] = result;
+  setOptionList(provinces, 'province');
+  setCheckboxList(saleTypes, 'equipments');
+});
 
 let generalData = {
   title: '',
