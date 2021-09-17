@@ -158,12 +158,28 @@ onUpdateField('equipments', (e) => {
     equipments: [value],
   };
 });
-
 onSubmitForm('insert-feature-button', () => {
   const newFeature = document.getElementById('newFeature').value;
-  onAddFeature(newFeature);
+  if (newFeature) {
+    onAddFeature(newFeature);
+  }
 });
 
+const updateMainFeatures = () => {
+  let newMainFeatures = [];
+  document
+    .getElementById('mainFeatures')
+    .querySelectorAll('span')
+    .forEach((span) => {
+      newMainFeatures.push(span.innerText);
+    });
+  propertyData = {
+    ...propertyData,
+    mainFeatures: newMainFeatures,
+  };
+};
+
 onSubmitForm('save-button', () => {
-  console.log(generalData);
+  updateMainFeatures();
+  console.log(propertyData);
 });
