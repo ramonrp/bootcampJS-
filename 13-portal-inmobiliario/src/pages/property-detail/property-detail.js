@@ -9,6 +9,8 @@ import {
   onSetFormErrors,
 } from '../../common/helpers';
 import { formValidator } from './property-detail.validators';
+import { insertContact } from './property-detail.api';
+
 const params = history.getParams();
 
 if (params.id) {
@@ -51,6 +53,8 @@ onSubmitForm('contact-button', () => {
   formValidator.validateForm(contact).then((result) => {
     onSetFormErrors(result);
     if (result.succeeded) {
+      insertContact(contact);
+      history.back();
     }
   });
 });
