@@ -4,7 +4,12 @@ import {
   getSaleType,
   getEquipments,
 } from './upload-property.api';
-import { setCheckboxList, setOptionList } from './upload-property.helpers';
+import {
+  setCheckboxList,
+  setOptionList,
+  onAddFeature,
+  onRemoveFeature,
+} from './upload-property.helpers';
 
 Promise.all([getProvinces(), getSaleType(), getEquipments()]).then((result) => {
   const [provinces, saleTypes, equipments] = result;
@@ -152,6 +157,11 @@ onUpdateField('equipments', (e) => {
     ...propertyData,
     equipments: [value],
   };
+});
+
+onSubmitForm('insert-feature-button', () => {
+  const newFeature = document.getElementById('newFeature').value;
+  onAddFeature(newFeature);
 });
 
 onSubmitForm('save-button', () => {

@@ -1,6 +1,6 @@
-export const formatCheckboxId = item => `${item.id}-${item.name}`;
+export const formatCheckboxId = (item) => `${item.id}-${item.name}`;
 
-const getCheckbox = item => {
+const getCheckbox = (item) => {
   const container = document.createElement('label');
   container.classList.add('checkbox-contenedor');
   container.textContent = item.name;
@@ -20,13 +20,13 @@ const getCheckbox = item => {
 
 export const setCheckboxList = (list, id) => {
   const listElement = document.getElementById(id);
-  list.forEach(item => {
+  list.forEach((item) => {
     const checkbox = getCheckbox(item);
     listElement.appendChild(checkbox);
   });
 };
 
-const getOption = item => {
+const getOption = (item) => {
   const option = document.createElement('option');
   option.value = item.id;
   option.textContent = item.name;
@@ -42,16 +42,16 @@ export const setOptionList = (list, id) => {
   defaultOption.textContent = 'Provincia';
   listElement.appendChild(defaultOption);
 
-  list.forEach(item => {
+  list.forEach((item) => {
     const option = getOption(item);
     listElement.appendChild(option);
   });
 };
 
-export const formatDeleteFeatureButtonId = feature =>
+export const formatDeleteFeatureButtonId = (feature) =>
   `delete-${feature}-button`;
 
-export const onAddFeature = feature => {
+export const onAddFeature = (feature) => {
   const mainFeaturesElement = document.getElementById('mainFeatures');
 
   const featureContainer = document.createElement('div');
@@ -61,6 +61,7 @@ export const onAddFeature = feature => {
   const deleteButton = document.createElement('button');
   deleteButton.id = formatDeleteFeatureButtonId(feature);
   deleteButton.type = 'button';
+  deleteButton.addEventListener('click', () => onRemoveFeature(feature));
 
   const featureElement = document.createElement('span');
   featureElement.textContent = feature;
@@ -73,14 +74,14 @@ export const onAddFeature = feature => {
   newFeatureElement.value = '';
 };
 
-export const onRemoveFeature = feature => {
+export const onRemoveFeature = (feature) => {
   const mainFeaturesElement = document.getElementById('mainFeatures');
   const featureContainer = document.getElementById(`delete-${feature}`);
 
   mainFeaturesElement.removeChild(featureContainer);
 };
 
-export const onAddImage = image => {
+export const onAddImage = (image) => {
   const imagesElement = document.getElementById('images');
   const addImageButton = document.getElementById('add-image-button');
 
