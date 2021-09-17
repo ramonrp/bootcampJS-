@@ -1,4 +1,4 @@
-import { onUpdateField, onSubmitForm } from '../../common/helpers';
+import { onUpdateField, onSubmitForm, onSetError } from '../../common/helpers';
 import {
   getProvinces,
   getSaleType,
@@ -10,6 +10,7 @@ import {
   onAddFeature,
   onAddImage,
 } from './upload-property.helpers';
+import { formValidation } from './upload-property.validators';
 
 Promise.all([getProvinces(), getSaleType(), getEquipments()]).then((result) => {
   const [provinces, saleTypes, equipments] = result;
@@ -33,6 +34,9 @@ onUpdateField('title', (e) => {
     ...generalData,
     title: value,
   };
+  formValidation.validateField('title', generalData.title).then((result) => {
+    onSetError('title', result);
+  });
 });
 
 onUpdateField('notes', (e) => {
@@ -41,6 +45,9 @@ onUpdateField('notes', (e) => {
     ...generalData,
     notes: value,
   };
+  formValidation.validateField('notes', generalData.notes).then((result) => {
+    onSetError('notes', result);
+  });
 });
 
 onUpdateField('email', (e) => {
@@ -49,6 +56,9 @@ onUpdateField('email', (e) => {
     ...generalData,
     email: value,
   };
+  formValidation.validateField('email', generalData.email).then((result) => {
+    onSetError('email', result);
+  });
 });
 
 onUpdateField('phone', (e) => {
@@ -57,6 +67,9 @@ onUpdateField('phone', (e) => {
     ...generalData,
     phone: value,
   };
+  formValidation.validateField('phone', generalData.phone).then((result) => {
+    onSetError('phone', result);
+  });
 });
 
 onUpdateField('price', (e) => {
@@ -65,6 +78,9 @@ onUpdateField('price', (e) => {
     ...generalData,
     price: value,
   };
+  formValidation.validateField('price', generalData.price).then((result) => {
+    onSetError('price', result);
+  });
 });
 
 let salesTypes = [];
@@ -80,6 +96,11 @@ onUpdateField('saleTypes', (e) => {
     ...generalData,
     salesTypes: salesTypes,
   };
+  formValidation
+    .validateField('saleTypes', generalData.salesTypes)
+    .then((result) => {
+      onSetError('saleTypes', result);
+    });
 });
 
 let propertyData = {
