@@ -19,6 +19,7 @@ let generalData = {
   email: '',
   phone: '',
   price: '',
+  salesTypes: [],
 };
 
 onUpdateField('title', (e) => {
@@ -58,6 +59,21 @@ onUpdateField('price', (e) => {
   generalData = {
     ...generalData,
     price: value,
+  };
+});
+
+let salesTypes = [];
+onUpdateField('saleTypes', (e) => {
+  const value = e.target.value;
+  const checked = e.target.checked;
+  if (checked) {
+    salesTypes.push(value);
+  } else {
+    salesTypes = salesTypes.filter((saleType) => saleType != value);
+  }
+  generalData = {
+    ...generalData,
+    salesTypes: salesTypes,
   };
 });
 
@@ -139,5 +155,5 @@ onUpdateField('equipments', (e) => {
 });
 
 onSubmitForm('save-button', () => {
-  console.log(propertyData);
+  console.log(generalData);
 });
