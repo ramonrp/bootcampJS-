@@ -1,5 +1,3 @@
-import { getEquipments } from './property-detail.api';
-
 export const propertyDetailFromApiToVm = (propertyApi) => {
   const priceFormated = new Intl.NumberFormat('es-ES', {
     style: 'currency',
