@@ -19,7 +19,7 @@ const validationSchema = {
     notes: [
       {
         validator: Validators.maxLength,
-        customArgs: { length: 250 },
+        customArgs: { length: 1000 },
         message: 'Este campo no puede superar los 250 carácteres',
       },
     ],
