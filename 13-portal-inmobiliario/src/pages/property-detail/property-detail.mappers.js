@@ -11,7 +11,7 @@ export const propertyDetailFromApiToVm = (propertyApi) => {
   return {
     title: propertyApi.title,
     notes: propertyApi.notes,
-    image: propertyApi.images[0],
+    mainImage: propertyApi.images[0],
     images: propertyApi.images,
     id: propertyApi.id,
     price: priceFormated,
@@ -26,6 +26,6 @@ export const propertyDetailFromApiToVm = (propertyApi) => {
         : `${propertyApi.bathrooms} cuarto de baño`,
     mainFeatures: propertyApi.mainFeatures,
     locationUrl: propertyApi.locationUrl,
-    equipmentIds: propertyApi.equipmentIds,
+    equipments: propertyApi.equipmentIds,
   };
 };
