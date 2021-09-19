@@ -1,5 +1,5 @@
 import { history } from '../../core/router';
-import { getPropertyPerId } from './property-detail.api';
+import { getPropertyPerId, getEquipments } from './property-detail.api';
 import { setPropertyValues } from './property-detail.helpers';
 import { propertyDetailFromApiToVm } from './property-detail.mappers';
 import {
@@ -14,8 +14,21 @@ import { insertContact } from './property-detail.api';
 const params = history.getParams();
 
 if (params.id) {
+  let reducedEquipment;
+  getEquipments().then((equipmentsArr) => {
+    reducedEquipment = equipmentsArr.reduce((acc, equipment) => {
+      const id = equipment.id;
+      const name = equipment.name;
+      const newEquipment = { [id]: name };
+      return { ...acc, ...newEquipment };
+    }, {});
+  });
   getPropertyPerId(params.id).then((propertyArray) => {
     if (propertyArray[0]) {
+      const propertyApi = propertyArray[0];
+      propertyApi.equipmentIds = propertyApi.equipmentIds.map(
+        (equipmentId) => reducedEquipment[equipmentId]
+      );
       const propertyVm = propertyDetailFromApiToVm(propertyArray[0]);
       setPropertyValues(propertyVm);
     }
