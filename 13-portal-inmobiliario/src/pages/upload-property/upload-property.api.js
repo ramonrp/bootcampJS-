@@ -13,3 +13,9 @@ export const getProvinces = () => {
 export const getEquipments = () => {
   return Axios.get(`${url}/equipments`).then((response) => response.data);
 };
+
+export const insertProperty = (propertyObj) => {
+  return Axios.post(`${url}/properties`, propertyObj).then(
+    (response) => response.data
+  );
+};
