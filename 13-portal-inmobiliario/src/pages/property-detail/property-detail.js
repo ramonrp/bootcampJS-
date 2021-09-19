@@ -66,8 +66,9 @@ onSubmitForm('contact-button', () => {
   formValidator.validateForm(contact).then((result) => {
     onSetFormErrors(result);
     if (result.succeeded) {
-      insertContact(contact);
-      history.back();
+      insertContact(contact).then((result) => {
+        history.back();
+      });
     }
   });
 });
