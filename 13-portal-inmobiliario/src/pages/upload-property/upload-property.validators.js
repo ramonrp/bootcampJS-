@@ -1,6 +1,7 @@
 import { createFormValidation, Validators } from '@lemoncode/fonk';
 import { positiveNumber } from '@lemoncode/fonk-positive-number-validator';
 import { arrayRequired } from '@lemoncode/fonk-array-required-validator';
+import { isUrl } from '@lemoncode/fonk-is-url-validator';
 
 const validationSchema = {
   field: {
@@ -58,6 +59,81 @@ const validationSchema = {
         validator: arrayRequired.validator,
         customArgs: { minLength: 1 },
         message: 'Elige al menos una opción',
+      },
+    ],
+    address: [
+      {
+        validator: Validators.required,
+        message: 'Campo requerido',
+      },
+    ],
+    city: [
+      {
+        validator: Validators.required,
+        message: 'Campo requerido',
+      },
+    ],
+    province: [
+      {
+        validator: Validators.required,
+        message: 'Campo requerido',
+      },
+    ],
+    squareMeter: [
+      {
+        validator: positiveNumber.validator,
+        customArgs: { allowZero: false },
+        message: 'Introducir un número positivo',
+      },
+      {
+        validator: Validators.required,
+        message: 'Campo requerido',
+      },
+    ],
+    rooms: [
+      {
+        validator: positiveNumber.validator,
+        customArgs: { allowZero: false },
+        message: 'Introducir un número positivo',
+      },
+      {
+        validator: Validators.required,
+        message: 'Campo requerido',
+      },
+    ],
+    bathrooms: [
+      {
+        validator: positiveNumber.validator,
+        customArgs: { allowZero: false },
+        message: 'Introducir un número positivo',
+      },
+      {
+        validator: Validators.required,
+        message: 'Campo requerido',
+      },
+    ],
+    locationUrl: [
+      {
+        validator: isUrl.validator,
+        message: 'Introduzca una Url válida',
+      },
+    ],
+    mainFeatures: [
+      {
+        validator: arrayRequired.validator,
+        customArgs: { minLength: 0 },
+      },
+    ],
+    equipments: [
+      {
+        validator: arrayRequired.validator,
+        customArgs: { minLength: 0 },
+      },
+    ],
+    images: [
+      {
+        validator: arrayRequired.validator,
+        customArgs: { minLength: 0 },
       },
     ],
   },
