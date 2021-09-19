@@ -8,6 +8,7 @@ import {
   getProvinces,
   getSaleType,
   getEquipments,
+  insertProperty,
 } from './upload-property.api';
 import {
   setCheckboxList,
@@ -16,6 +17,7 @@ import {
   onAddImage,
 } from './upload-property.helpers';
 import { formValidation } from './upload-property.validators';
+import { propertyFromVMtoApi } from './upload-property.mappers';
 
 Promise.all([getProvinces(), getSaleType(), getEquipments()]).then((result) => {
   const [provinces, saleTypes, equipments] = result;
@@ -276,8 +278,11 @@ onSubmitForm('save-button', () => {
     .then((result) => {
       onSetFormErrors(result);
       if (result.succeeded) {
-        // mapper propertyvmtoapi
-        // post property to server
+        const propertyApi = propertyFromVMtoApi({
+          ...generalData,
+          ...propertyData,
+        });
+        insertProperty(propertyApi).then((result) => history.back());
       }
     });
 });
