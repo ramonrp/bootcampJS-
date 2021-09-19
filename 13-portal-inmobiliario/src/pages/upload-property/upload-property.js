@@ -1,4 +1,9 @@
-import { onUpdateField, onSubmitForm, onSetError } from '../../common/helpers';
+import {
+  onUpdateField,
+  onSubmitForm,
+  onSetError,
+  onSetFormErrors,
+} from '../../common/helpers';
 import {
   getProvinces,
   getSaleType,
@@ -25,7 +30,7 @@ let generalData = {
   email: '',
   phone: '',
   price: '',
-  salesTypes: [],
+  saleTypes: [],
 };
 
 onUpdateField('title', (e) => {
@@ -83,21 +88,21 @@ onUpdateField('price', (e) => {
   });
 });
 
-let salesTypes = [];
+let newSaleTypes = [];
 onUpdateField('saleTypes', (e) => {
   const value = e.target.value;
   const checked = e.target.checked;
   if (checked) {
-    salesTypes.push(value);
+    newSaleTypes.push(value);
   } else {
-    salesTypes = salesTypes.filter((saleType) => saleType != value);
+    newSaleTypes = newSaleTypes.filter((saleType) => saleType != value);
   }
   generalData = {
     ...generalData,
-    salesTypes: salesTypes,
+    saleTypes: newSaleTypes,
   };
   formValidation
-    .validateField('saleTypes', generalData.salesTypes)
+    .validateField('saleTypes', generalData.saleTypes)
     .then((result) => {
       onSetError('saleTypes', result);
     });
@@ -123,14 +128,24 @@ onUpdateField('address', (e) => {
     ...propertyData,
     address: value,
   };
+  formValidation
+    .validateField('address', propertyData.address)
+    .then((result) => {
+      onSetError('address', result);
+    });
 });
 
 onUpdateField('province', (e) => {
   const value = e.target.value;
   propertyData = {
     ...propertyData,
-    provinceId: value,
+    province: value,
   };
+  formValidation
+    .validateField('province', propertyData.province)
+    .then((result) => {
+      onSetError('province', result);
+    });
 });
 
 onUpdateField('city', (e) => {
@@ -139,6 +154,9 @@ onUpdateField('city', (e) => {
     ...propertyData,
     city: value,
   };
+  formValidation.validateField('city', propertyData.city).then((result) => {
+    onSetError('city', result);
+  });
 });
 
 onUpdateField('squareMeter', (e) => {
@@ -147,6 +165,11 @@ onUpdateField('squareMeter', (e) => {
     ...propertyData,
     squareMeter: value,
   };
+  formValidation
+    .validateField('squareMeter', propertyData.squareMeter)
+    .then((result) => {
+      onSetError('squareMeter', result);
+    });
 });
 
 onUpdateField('rooms', (e) => {
@@ -155,6 +178,9 @@ onUpdateField('rooms', (e) => {
     ...propertyData,
     rooms: value,
   };
+  formValidation.validateField('rooms', propertyData.rooms).then((result) => {
+    onSetError('rooms', result);
+  });
 });
 
 onUpdateField('bathrooms', (e) => {
@@ -163,6 +189,11 @@ onUpdateField('bathrooms', (e) => {
     ...propertyData,
     bathrooms: value,
   };
+  formValidation
+    .validateField('bathrooms', propertyData.bathrooms)
+    .then((result) => {
+      onSetError('bathrooms', result);
+    });
 });
 
 onUpdateField('locationUrl', (e) => {
@@ -171,6 +202,11 @@ onUpdateField('locationUrl', (e) => {
     ...propertyData,
     locationUrl: value,
   };
+  formValidation
+    .validateField('locationUrl', propertyData.locationUrl)
+    .then((result) => {
+      onSetError('locationUrl', result);
+    });
 });
 
 onSubmitForm('insert-feature-button', () => {
@@ -192,6 +228,11 @@ onUpdateField('equipments', (e) => {
     ...propertyData,
     equipments: newEquipments,
   };
+  formValidation
+    .validateField('equipments', propertyData.equipments)
+    .then((result) => {
+      onSetError('equipments', result);
+    });
 });
 const updateMainFeatures = () => {
   let newMainFeatures = [];
@@ -205,6 +246,11 @@ const updateMainFeatures = () => {
     ...propertyData,
     mainFeatures: newMainFeatures,
   };
+  formValidation
+    .validateField('mainFeatures', propertyData.mainFeatures)
+    .then((result) => {
+      onSetError('mainFeatures', result);
+    });
 };
 
 let newImages = [];
@@ -218,11 +264,22 @@ onUpdateField('add-image', (e) => {
       images: newImages,
     };
   });
+  formValidation.validateField('images', propertyData.images).then((result) => {
+    onSetError('images', result);
+  });
 });
 
 onSubmitForm('save-button', () => {
   updateMainFeatures();
-  console.log(propertyData);
+  formValidation
+    .validateForm({ ...generalData, ...propertyData })
+    .then((result) => {
+      onSetFormErrors(result);
+      if (result.succeeded) {
+        // mapper propertyvmtoapi
+        // post property to server
+      }
+    });
 });
 
 File.prototype.convertToBase64 = function (callback) {
